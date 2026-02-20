@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 class TestUserSeeder extends Seeder
 {
     /**
@@ -12,13 +13,29 @@ class TestUserSeeder extends Seeder
      */
     public function run(): void
     {
-      User::create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-              'password' => 'password123',// hashed automatically
-               'name' => 'Test User',
+        // Create demo users with different roles
+        User::create([
+            'name' => 'Demo Agent',
             'email' => 'agent@supportflow.com',
-              'password' => 'password123',
+            'password' => Hash::make('password123'),
+            'role' => 'agent',
+            'department' => 'Customer Support'
+        ]);
+
+        User::create([
+            'name' => 'Demo Supervisor',
+            'email' => 'supervisor@supportflow.com',
+            'password' => Hash::make('supervisor123'),
+            'role' => 'supervisor',
+            'department' => 'Support Team Lead'
+        ]);
+
+        User::create([
+            'name' => 'Demo Admin',
+            'email' => 'admin@supportflow.com',
+            'password' => Hash::make('admin123'),
+            'role' => 'admin',
+            'department' => 'System Administration'
         ]);
     }
     
